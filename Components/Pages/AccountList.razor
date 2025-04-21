@@ -1,0 +1,48 @@
+﻿@page "/accountlist"
+@inject NavigationManager Navigation
+
+<h3>アカウント一覧</h3>
+
+<!-- ユーザーアイコン（右上）：ログアウト確認用 -->
+<button style="position: absolute; top: 10px; right: 10px;" @onclick="ToggleLogoutPopup">👤</button>
+<!-- 設定アイコン（右下）：設定画面へ -->
+<button style="position: absolute; bottom: 10px; right: 10px;" @onclick="@(() => Navigation.NavigateTo("/settings"))">⚙️</button>
+
+<ul>
+    @foreach (var account in accounts)
+    {
+        <li style="cursor:pointer;" @onclick="@(() => Navigation.NavigateTo($"/accountdetails/{account.Id}"))">
+            @account.Name
+        </li>
+    }
+</ul>
+
+@if (showLogoutPopup)
+{
+    <div style="position: fixed; top: 30%; left: 30%; background: lightgray; padding: 20px;">
+        <p>ログアウトしますか？</p>
+        <button @onclick="@(() => Navigation.NavigateTo("/login"))">ログアウト</button>
+        <button @onclick="ToggleLogoutPopup">戻る</button>
+    </div>
+}
+
+@code {
+    private bool showLogoutPopup = false;
+    private List<Account> accounts = new List<Account>
+    {
+        new Account { Id = 1, Name = "アカウント1" },
+        new Account { Id = 2, Name = "アカウント2" },
+        new Account { Id = 3, Name = "アカウント3" }
+    };
+
+    private void ToggleLogoutPopup()
+    {
+        showLogoutPopup = !showLogoutPopup;
+    }
+
+    public class Account
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+    }
+}

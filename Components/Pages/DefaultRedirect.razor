@@ -1,0 +1,14 @@
+﻿<h3>DefaultRedirect</h3>
+
+@code {
+
+}
+@page "/"
+@inject NavigationManager Navigation
+
+@code {
+    protected override void OnInitialized()
+    {
+        Navigation.NavigateTo("/login", true);
+    }
+}

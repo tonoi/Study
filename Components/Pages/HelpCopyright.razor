@@ -1,0 +1,10 @@
+﻿@page "/help"
+@inject NavigationManager Navigation
+
+<h3>ヘルプ</h3>
+<p>アカウント管理の説明など</p>
+
+<h3>コピーライト</h3>
+<p>MIT License</p>
+
+<button @onclick="@(() => Navigation.NavigateTo("/settings"))">戻る</button>
