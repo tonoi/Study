@@ -1,0 +1,9 @@
+﻿@page "/settings"
+@inject NavigationManager Navigation
+
+<h3>設定</h3>
+<button @onclick="@(() => Navigation.NavigateTo("/accountlist"))">戻る</button>
+<br /><br />
+<button @onclick="@(() => Navigation.NavigateTo("/help"))" style="margin-top:20px;">
+    Help / Copyright
+</button>

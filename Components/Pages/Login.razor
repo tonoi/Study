@@ -1,0 +1,37 @@
+﻿@page "/login"
+@inject NavigationManager Navigation
+
+<h3>ログイン</h3>
+<div>
+    <label>ユーザー名:</label>
+    <input @bind="Username" />
+</div>
+<div>
+    <label>パスワード:</label>
+    <input type="password" @bind="Password" />
+</div>
+<button @onclick="HandleLogin">ログイン</button>
+
+@if (!string.IsNullOrEmpty(ErrorMessage))
+{
+    <p style="color:red;">@ErrorMessage</p>
+}
+
+@code {
+    private string Username = string.Empty;
+    private string Password = string.Empty;
+    private string ErrorMessage = string.Empty;
+
+    private void HandleLogin()
+    {
+        // 両方の入力があれば成功とする
+        if (!string.IsNullOrEmpty(Username) && !string.IsNullOrEmpty(Password))
+        {
+            Navigation.NavigateTo("/accountlist");
+        }
+        else
+        {
+            ErrorMessage = "ユーザー名とパスワードを入力してください。";
+        }
+    }
+}

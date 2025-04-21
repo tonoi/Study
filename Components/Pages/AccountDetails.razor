@@ -1,0 +1,12 @@
+﻿@page "/accountdetails/{AccountId:int}"
+@inject NavigationManager Navigation
+
+<h3>アカウント詳細</h3>
+<p>アカウントID: @AccountId</p>
+<p>アカウント名: アカウント@AccountId</p>
+<button @onclick="@(() => Navigation.NavigateTo("/accountlist"))">戻る</button>
+
+@code {
+    [Parameter]
+    public int AccountId { get; set; }
+}
