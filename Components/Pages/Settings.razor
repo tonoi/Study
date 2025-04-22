@@ -1,5 +1,6 @@
 ﻿@page "/settings"
 @inject NavigationManager Navigation
+@using Microsoft.Maui.ApplicationModel
 
 <h3>設定</h3>
 <button @onclick="@(() => Navigation.NavigateTo("/accountlist"))">戻る</button>
@@ -7,3 +8,13 @@
 <button @onclick="@(() => Navigation.NavigateTo("/help"))" style="margin-top:20px;">
     Help / Copyright
 </button>
+<br /><br />
+<button @onclick="OpenCloudUrl" style="margin-top:20px;">Cloud</button>
+
+@code {
+    private async Task OpenCloudUrl()
+    {
+        var url = "https://authpoc-app-20250422131204.orangedune-02c2314a.japaneast.azurecontainerapps.io/Account/Register"; // 開きたいURLを指定
+        await Browser.OpenAsync(url, BrowserLaunchMode.SystemPreferred);
+    }
+}

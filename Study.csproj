@@ -30,6 +30,12 @@
         <!-- Versions -->
         <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
         <ApplicationVersion>1</ApplicationVersion>
+			
+      <AndroidKeyStore>True</AndroidKeyStore>
+      <AndroidSigningKeyStore>ContinYou_Study.jks</AndroidSigningKeyStore>
+      <AndroidSigningStorePass>password</AndroidSigningStorePass>
+      <AndroidSigningKeyAlias>ContinYou_Study</AndroidSigningKeyAlias>
+      <AndroidSigningKeyPass>password</AndroidSigningKeyPass>
 
         <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">14.2</SupportedOSPlatformVersion>
         <SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">14.0</SupportedOSPlatformVersion>

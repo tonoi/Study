@@ -14,6 +14,7 @@
         <li style="cursor:pointer;" @onclick="@(() => Navigation.NavigateTo($"/accountdetails/{account.Id}"))">
             @account.Name
         </li>
+        <br />
     }
 </ul>
 
@@ -30,9 +31,9 @@
     private bool showLogoutPopup = false;
     private List<Account> accounts = new List<Account>
     {
-        new Account { Id = 1, Name = "アカウント1" },
-        new Account { Id = 2, Name = "アカウント2" },
-        new Account { Id = 3, Name = "アカウント3" }
+        new Account { Id = 1, Name = "アカウント1@gmail.com" },
+        new Account { Id = 2, Name = "アカウント2@tonoi.co.jp" },
+        new Account { Id = 3, Name = "アカウント3@hotmail.com" }
     };
 
     private void ToggleLogoutPopup()
