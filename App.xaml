@@ -5,7 +5,13 @@
              x:Class="Study.App">
     <Application.Resources>
         <ResourceDictionary>
-            <!-- リソースの定義 -->
+
+        <!--
+            For information about styling .NET MAUI pages
+            please refer to the documentation:
+            https://go.microsoft.com/fwlink/?linkid=2282329
+        -->
+
         </ResourceDictionary>
     </Application.Resources>
 </Application>

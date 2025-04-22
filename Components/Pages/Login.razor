@@ -1,16 +1,17 @@
 ﻿@page "/login"
 @inject NavigationManager Navigation
+@using Microsoft.Maui.Devices
 
 <h3>ログイン</h3>
-<div>
-    <label>ユーザー名:</label>
-    <input @bind="Username" />
-</div>
-<div>
-    <label>パスワード:</label>
-    <input type="password" @bind="Password" />
-</div>
-<button @onclick="HandleLogin">ログイン</button>
+
+<p>
+    <button @onclick="AuthenticateWithBiometrics">指紋/顔認証でログイン</button>
+</p>
+<p>
+    <label>パスコード:</label>
+    <input type="password" @bind="Passcode" />
+</p>
+<button @onclick="AuthenticateWithPasscode">パスコードでログイン</button>
 
 @if (!string.IsNullOrEmpty(ErrorMessage))
 {
@@ -18,20 +19,57 @@
 }
 
 @code {
-    private string Username = string.Empty;
-    private string Password = string.Empty;
+    private string Passcode = string.Empty;
     private string ErrorMessage = string.Empty;
 
-    private void HandleLogin()
+    private async Task AuthenticateWithBiometrics()
     {
-        // 両方の入力があれば成功とする
-        if (!string.IsNullOrEmpty(Username) && !string.IsNullOrEmpty(Password))
+        try
+        {
+            // 生体認証のサポートを確認
+            var isSupported = DeviceInfo.Platform == DevicePlatform.Android || DeviceInfo.Platform == DevicePlatform.iOS;
+
+            if (!isSupported)
+            {
+                ErrorMessage = "このデバイスは生体認証をサポートしていません。";
+                return;
+            }
+
+            // 生体認証の実行（例: 実際の非同期認証ロジックをここに実装）
+            var result = await PerformBiometricAuthenticationAsync();
+
+            if (result)
+            {
+                Navigation.NavigateTo("/accountlist");
+            }
+            else
+            {
+                ErrorMessage = "認証に失敗しました。";
+            }
+        }
+        catch (Exception ex)
+        {
+            ErrorMessage = $"エラーが発生しました: {ex.Message}";
+        }
+    }
+
+    private Task<bool> PerformBiometricAuthenticationAsync()
+    {
+        // 実際の生体認証ロジックを非同期で実装
+        // ここでは仮の非同期処理を記述
+        return Task.FromResult(true);
+    }
+
+    private void AuthenticateWithPasscode()
+    {
+        // パスコードが "0000" の場合に成功とする（例）
+        if (Passcode == "0000")
         {
             Navigation.NavigateTo("/accountlist");
         }
         else
         {
-            ErrorMessage = "ユーザー名とパスワードを入力してください。";
+            ErrorMessage = "パスコードが正しくありません。";
         }
     }
 }
